@@ -1,0 +1,84 @@
+*stockholm.txt*  Base-pair highlighting for Stockholm alignments
+
+==============================================================================
+CONTENTS                                                    *stockholm-contents*
+
+  1. Introduction ............................ |stockholm-introduction|
+  2. Usage ................................... |stockholm-usage|
+  3. Configuration ........................... |stockholm-configuration|
+  4. Commands ................................ |stockholm-commands|
+  5. Highlight groups ........................ |stockholm-highlights|
+
+==============================================================================
+1. INTRODUCTION                                         *stockholm-introduction*
+
+stockholm.nvim reads the `#=GC SS_cons*` lines of a Stockholm (`.sto`)
+alignment, works out which bases pair, and colours both partners the same
+way on the structure line and in every sequence at those columns. Requires
+Neovim 0.10 or later.
+
+Supported bracket types are `<>`, `()`, `[]`, `{}` and pseudoknot letters
+`Aa` to `Zz`.
+
+==============================================================================
+2. USAGE                                                        *stockholm-usage*
+
+Open a `.sto`, `.stk` or `.stockholm` file. The filetype is `stockholm`.
+
+Every `SS_cons*` line is coloured by its own pairs. The sequences are
+coloured by one active structure line, marked `colours sequences` at the end
+of the line. Moving the cursor onto another structure line makes it active.
+
+With the cursor on a paired base, that base and its partner are highlighted
+in every sequence, and the structure line shows a readout such as
+`pair 14: col 45 <-> col 88 (G-C)`.
+
+Default mappings (buffer-local, see |stockholm-configuration|):
+
+  gp        Jump to the base paired with the one under the cursor.
+  ]s        Colour the sequences by the next structure line.
+  [s        Colour the sequences by the previous structure line.
+
+==============================================================================
+3. CONFIGURATION                                        *stockholm-configuration*
+
+                                                              *stockholm.setup()*
+require("stockholm").setup({opts})
+
+Optional. Defaults: >lua
+
+    require("stockholm").setup({
+      color_mode = "pair",
+      mappings = {
+        next_structure = "]s",
+        prev_structure = "[s",
+        goto_partner = "gp",
+      },
+    })
+<
+  color_mode    "pair" gives each base pair its own colour. "stem" gives each
+                helix one colour. Can also be set with
+                `g:stockholm_color_mode`.
+  mappings      Set an entry to false to skip it, or the whole table to
+                false for no mappings.
+
+==============================================================================
+4. COMMANDS                                                  *stockholm-commands*
+
+                                                               *:StockholmNext*
+:StockholmNext      Colour sequences by the next `SS_cons*` line.
+
+                                                               *:StockholmPrev*
+:StockholmPrev      Colour sequences by the previous `SS_cons*` line.
+
+==============================================================================
+5. HIGHLIGHT GROUPS                                         *stockholm-highlights*
+
+  StoPair1 .. StoPair120   Pair colours.
+  StoPairCursor            Base under the cursor and its partner.
+  StoActive                The "colours sequences" note.
+  StoReadout               The pair readout.
+
+All groups are defined with `default = true`.
+
+ vim:tw=78:ts=8:ft=help:norl:
