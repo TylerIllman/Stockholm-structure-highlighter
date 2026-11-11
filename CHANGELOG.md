@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Colours are now keyed by the pair's two columns, so a pair shared by several `SS_cons*` lines in an alignment has the same colour in every line, and pairs that differ get different colours. In `stem` mode a stem takes the colour of its outermost pair.
+
 ## 0.1.0
 
 - Initial release: pair highlighting, stem mode, partner jump, pair readout, multiple structure lines

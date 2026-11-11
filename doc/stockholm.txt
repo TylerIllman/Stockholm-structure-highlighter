@@ -25,6 +25,10 @@ Supported bracket types are `<>`, `()`, `[]`, `{}` and pseudoknot letters
 
 Open a `.sto`, `.stk` or `.stockholm` file. The filetype is `stockholm`.
 
+Colours belong to the pair itself (its two columns), so a pair shared by
+several structure lines has the same colour in all of them, and pairs that
+differ get different colours.
+
 Every `SS_cons*` line is coloured by its own pairs. The sequences are
 coloured by one active structure line, marked `colours sequences` at the end
 of the line. Moving the cursor onto another structure line makes it active.

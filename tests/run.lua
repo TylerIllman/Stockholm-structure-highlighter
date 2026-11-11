@@ -86,6 +86,23 @@ do
   check("block offsets", state.records[1].blocks[2].off == 4)
 end
 
+-- A pair shared by several structure lines keeps one colour; pairs that differ get new ones.
+do
+  local state = parse({
+    "seq   ACGUACGUAC",
+    "#=GC SS_cons_a  <<<..>>>..",
+    "#=GC SS_cons_b  <<<..>>.>.",
+  })
+  local a = state.records[1].structs["SS_cons_a"]
+  local b = state.records[1].structs["SS_cons_b"]
+  -- Pairs 2-7 and 3-6 are shared. Pair 1-8 in line a becomes 1-9 in line b.
+  check("shared pair has the same colour", a.pair_color[2] == b.pair_color[2] and a.pair_color[3] == b.pair_color[3])
+  check("shared pair colours match at both ends", a.pair_color[2] == a.pair_color[7])
+  check("different pairs get different colours", a.pair_color[1] ~= b.pair_color[1])
+  check("every pair is coloured in both lines", a.pair_color[1] ~= nil and b.pair_color[1] ~= nil)
+  check("stem colour is the colour of its outermost pair", b.stem_color[3] == b.pair_color[2])
+end
+
 -- Filetype detection.
 do
   vim.cmd("enew")

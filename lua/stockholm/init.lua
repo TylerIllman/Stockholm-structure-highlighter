@@ -74,7 +74,7 @@ local function pair_up(global)
     end
   end
   -- Consecutive stacked pairs (i, j) and (i + 1, j - 1) belong to the same stem.
-  local stem_id, nstems = {}, 0
+  local stem_id, stem_first, nstems = {}, {}, 0
   for g = 1, #global do
     local c = partner[g]
     if c and c > g then
@@ -83,11 +83,19 @@ local function pair_up(global)
       else
         nstems = nstems + 1
         stem_id[g] = nstems
+        stem_first[nstems] = { g, c }
       end
       stem_id[c] = stem_id[g]
     end
   end
-  return { partner = partner, pair_id = pair_id, stem_id = stem_id, npairs = next_id }
+  return {
+    partner = partner,
+    pair_id = pair_id,
+    stem_id = stem_id,
+    stem_first = stem_first,
+    npairs = next_id,
+    len = #global,
+  }
 end
 
 -- Parses the buffer into records (one per "//"-terminated alignment). A record holds
@@ -132,6 +140,43 @@ local function parse(buf)
       end
       rec.structs[name] = pair_up(table.concat(pieces))
     end
+    -- Colours belong to the pair itself (its two columns), so a pair shared by several
+    -- structure lines keeps one colour and only pairs that differ get new ones.
+    local union, seen = {}, {}
+    for _, name in ipairs(rec.order) do
+      local struct = rec.structs[name]
+      for g = 1, struct.len do
+        local c = struct.partner[g]
+        if c and c > g and not seen[g .. ":" .. c] then
+          seen[g .. ":" .. c] = true
+          union[#union + 1] = { g, c }
+        end
+      end
+    end
+    table.sort(union, function(a, b)
+      if a[1] ~= b[1] then
+        return a[1] < b[1]
+      end
+      return a[2] < b[2]
+    end)
+    local color_of = {}
+    for i, pair in ipairs(union) do
+      color_of[pair[1] .. ":" .. pair[2]] = i
+    end
+    for _, name in ipairs(rec.order) do
+      local struct = rec.structs[name]
+      struct.pair_color, struct.stem_color = {}, {}
+      for g = 1, struct.len do
+        local c = struct.partner[g]
+        if c then
+          local lo, hi = math.min(g, c), math.max(g, c)
+          struct.pair_color[g] = color_of[lo .. ":" .. hi]
+          local first = struct.stem_first[struct.stem_id[lo]]
+          struct.stem_color[g] = color_of[first[1] .. ":" .. first[2]]
+        end
+      end
+    end
+
     -- Default structure: the first one that actually contains pairs.
     rec.default = rec.order[1]
     for _, name in ipairs(rec.order) do
@@ -312,7 +357,7 @@ vim.api.nvim_set_decoration_provider(ns, {
     local struct = row_struct(buf, info)
     if struct then
       local off = info.block.off
-      local pair_id = (vim.g.stockholm_color_mode or M.config.color_mode) == "stem" and struct.stem_id or struct.pair_id
+      local pair_id = (vim.g.stockholm_color_mode or M.config.color_mode) == "stem" and struct.stem_color or struct.pair_color
       for c = 1, info.len do
         local id = pair_id[off + c]
         if id then
