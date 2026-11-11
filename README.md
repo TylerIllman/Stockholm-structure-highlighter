@@ -10,6 +10,7 @@ colours both partners the same way, on the structure line and in every sequence 
 
 - Every base pair gets its own colour (120 distinct hues), so an opener and its closer are easy to match.
 - Colours belong to the pair itself, so a pair that appears in several structure lines keeps one colour across all of them. Only pairs that differ between lines get new colours, which makes differences between structures easy to spot.
+- The colour numbering is anchored to the structure line you are on (or the default one, the first line with pairs). Its pairs get the colours in order, and pairs found only in other lines get new colours after them.
 - An optional `stem` mode gives each helix a single colour instead.
 - Handles the WUSS bracket types `<>`, `()`, `[]`, `{}` and pseudoknot letters `Aa` to `Zz`.
 - Handles files with many alignments (one per `//`), several structure lines per alignment (for example

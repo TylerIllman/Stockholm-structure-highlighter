@@ -93,14 +93,20 @@ do
     "#=GC SS_cons_a  <<<..>>>..",
     "#=GC SS_cons_b  <<<..>>.>.",
   })
-  local a = state.records[1].structs["SS_cons_a"]
-  local b = state.records[1].structs["SS_cons_b"]
+  local rec = state.records[1]
+  local colors = sto._colors_for(rec, "SS_cons_a")
+  local a, b = colors["SS_cons_a"].pair, colors["SS_cons_b"].pair
   -- Pairs 2-7 and 3-6 are shared. Pair 1-8 in line a becomes 1-9 in line b.
-  check("shared pair has the same colour", a.pair_color[2] == b.pair_color[2] and a.pair_color[3] == b.pair_color[3])
-  check("shared pair colours match at both ends", a.pair_color[2] == a.pair_color[7])
-  check("different pairs get different colours", a.pair_color[1] ~= b.pair_color[1])
-  check("every pair is coloured in both lines", a.pair_color[1] ~= nil and b.pair_color[1] ~= nil)
-  check("stem colour is the colour of its outermost pair", b.stem_color[3] == b.pair_color[2])
+  check("shared pair has the same colour", a[2] == b[2] and a[3] == b[3])
+  check("shared pair colours match at both ends", a[2] == a[7])
+  check("different pairs get different colours", a[1] ~= b[1])
+  check("every pair is coloured in both lines", a[1] ~= nil and b[1] ~= nil)
+  check("stem colour is the colour of its outermost pair", colors["SS_cons_b"].stem[3] == b[2])
+  check("active structure is numbered first, in column order", a[1] == 1 and a[2] == 2 and a[3] == 3)
+
+  local other = sto._colors_for(rec, "SS_cons_b")
+  check("numbering follows the active structure", other["SS_cons_b"].pair[1] == 1)
+  check("sharing still holds when the active line changes", other["SS_cons_a"].pair[2] == other["SS_cons_b"].pair[2])
 end
 
 -- Filetype detection.

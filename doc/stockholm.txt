@@ -28,6 +28,8 @@ Open a `.sto`, `.stk` or `.stockholm` file. The filetype is `stockholm`.
 Colours belong to the pair itself (its two columns), so a pair shared by
 several structure lines has the same colour in all of them, and pairs that
 differ get different colours.
+The colour numbering starts with the active structure line, so its pairs get
+the colours in order and pairs found only in other lines are numbered after.
 
 Every `SS_cons*` line is coloured by its own pairs. The sequences are
 coloured by one active structure line, marked `colours sequences` at the end
