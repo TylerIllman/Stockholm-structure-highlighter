@@ -39,7 +39,7 @@ With [lazy.nvim](https://github.com/folke/lazy.nvim):
 ```lua
 {
   "TylerIllman/stockholm.nvim",
-  ft = "stockholm",
+  lazy = false, -- the plugin registers the stockholm filetype, so it must load at startup
   opts = {}, -- see Configuration
 }
 ```
