@@ -1,6 +1,6 @@
 # STOCKHOLM 1.0
 #=GF ID   tRNA_example
-#=GF DE   Synthetic tRNA-like example for trying stockholm.nvim
+#=GF DE   Synthetic tRNA-like example for trying the Stockholm structure highlighter
 
 yeast_tRNA-Phe/1-76               GCGGAUUUAGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUCGCACCA
 variant_a/1-76                    GCGGAUUUGGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUCGCACCA

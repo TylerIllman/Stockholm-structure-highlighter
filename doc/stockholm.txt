@@ -12,7 +12,7 @@ CONTENTS                                                    *stockholm-contents*
 ==============================================================================
 1. INTRODUCTION                                         *stockholm-introduction*
 
-stockholm.nvim reads the `#=GC SS_cons*` lines of a Stockholm (`.sto`)
+Stockholm structure highlighter reads the `#=GC SS_cons*` lines of a Stockholm (`.sto`)
 alignment, works out which bases pair, and colours both partners the same
 way on the structure line and in every sequence at those columns. Requires
 Neovim 0.10 or later.

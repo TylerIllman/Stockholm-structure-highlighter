@@ -1,4 +1,4 @@
---- stockholm.nvim: highlight base pairs in Stockholm (.sto) alignments.
+--- Stockholm structure highlighter: highlight base pairs in Stockholm (.sto) alignments.
 local M = {}
 
 M.config = {
