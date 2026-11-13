@@ -47,9 +47,17 @@ function M.define_highlights()
   for i = 1, NCOLORS do
     local hue = (i * 137.508) % 360
     local l = (i % 2 == 0) and 0.72 or 0.82
-    vim.api.nvim_set_hl(0, "StoPair" .. i, { bg = hsl_to_hex(hue, 0.75, l), fg = "#1e1e1e", default = true })
+    vim.api.nvim_set_hl(
+      0,
+      "StoPair" .. i,
+      { bg = hsl_to_hex(hue, 0.75, l), fg = "#1e1e1e", default = true }
+    )
   end
-  vim.api.nvim_set_hl(0, "StoPairCursor", { bg = "#000000", fg = "#ffffff", bold = true, default = true })
+  vim.api.nvim_set_hl(
+    0,
+    "StoPairCursor",
+    { bg = "#000000", fg = "#ffffff", bold = true, default = true }
+  )
   vim.api.nvim_set_hl(0, "StoActive", { link = "Comment", default = true })
   vim.api.nvim_set_hl(0, "StoReadout", { link = "DiagnosticInfo", default = true })
 end
@@ -174,7 +182,8 @@ local function parse(buf)
       if prefix then
         rec = rec or { blocks = {}, order = {}, start = i }
         block = block or { rows = {}, ss = {}, rec = rec }
-        local row = { lnum = i - 1, pre = #prefix, len = #data, kind = kind, name = name, block = block }
+        local row =
+          { lnum = i - 1, pre = #prefix, len = #data, kind = kind, name = name, block = block }
         block.rows[#block.rows + 1] = row
         rows[i - 1] = row
         if kind == "ss" then
@@ -327,7 +336,11 @@ local function cursor_columns(buf, state, win)
     struct = struct,
     text = string.format(
       " pair %d: col %d ↔ col %d (%s–%s) ",
-      struct.pair_id[g], lo, hi, base(lo_block, lo - lo_block.off), base(hi_block, hi - hi_block.off)
+      struct.pair_id[g],
+      lo,
+      hi,
+      base(lo_block, lo - lo_block.off),
+      base(hi_block, hi - hi_block.off)
     ),
   }
   return marks
@@ -366,8 +379,13 @@ vim.api.nvim_set_decoration_provider(ns, {
     if struct then
       local off = info.block.off
       local rec = info.block.rec
-      local colors = colors_for(rec, active_name(buf, rec))[info.kind == "ss" and info.name or active_name(buf, rec)]
-      local pair_id = (vim.g.stockholm_color_mode or M.config.color_mode) == "stem" and colors.stem or colors.pair
+      local colors =
+        colors_for(rec, active_name(buf, rec))[info.kind == "ss" and info.name or active_name(
+          buf,
+          rec
+        )]
+      local pair_id = (vim.g.stockholm_color_mode or M.config.color_mode) == "stem" and colors.stem
+        or colors.pair
       for c = 1, info.len do
         local id = pair_id[off + c]
         if id then

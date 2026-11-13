@@ -6,6 +6,14 @@ Reading a secondary-structure line like `<<<<___AAA_>>>>` and working out which 
 pair is slow. This plugin reads the `#=GC SS_cons*` lines in the file, works out every base pair, and
 colours both partners the same way, on the structure line and in every sequence at those columns.
 
+![A tRNA alignment with every base pair coloured, three structure lines, and the same pair keeping its colour across lines](docs/images/overview.png)
+
+Putting the cursor on a paired base highlights it and its partner in every sequence, and prints the pair on the structure line:
+
+![The cursor on a base in the D stem, with its partner highlighted in black and a readout of the pair](docs/images/partner.png)
+
+The example above is [examples/trna.sto](examples/trna.sto). It is synthetic data you can open to try the plugin.
+
 ## Features
 
 - Every base pair gets its own colour (120 distinct hues), so an opener and its closer are easy to match.

@@ -39,8 +39,12 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set("n", lhs, fn, { buffer = ev.buf, desc = desc })
       end
     end
-    map(maps.next_structure, function() sto.cycle(1) end, "Stockholm: next structure line")
-    map(maps.prev_structure, function() sto.cycle(-1) end, "Stockholm: previous structure line")
+    map(maps.next_structure, function()
+      sto.cycle(1)
+    end, "Stockholm: next structure line")
+    map(maps.prev_structure, function()
+      sto.cycle(-1)
+    end, "Stockholm: previous structure line")
     map(maps.goto_partner, sto.goto_partner, "Stockholm: jump to paired base")
   end,
 })

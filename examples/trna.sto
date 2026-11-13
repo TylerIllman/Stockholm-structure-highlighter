@@ -1,0 +1,11 @@
+# STOCKHOLM 1.0
+#=GF ID   tRNA_example
+#=GF DE   Synthetic tRNA-like example for trying stockholm.nvim
+
+yeast_tRNA-Phe/1-76               GCGGAUUUAGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUCGCACCA
+variant_a/1-76                    GCGGAUUUGGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUCGCACCA
+variant_b/1-76                    GCCGAUUUAGCUCAGUUGGGAGAGCGCCAGACUGGAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUGGCACCA
+#=GC SS_cons                      <<<<<<<..<<<<........>>>>.<<<<<.......>>>>>.....<<<<<.......>>>>>>>>>>>>....
+#=GC SS_cons_tertiary             <<<<<<<..<<<<....AB..>>>>.<<<<<.......>>>>>.....<<<<<.ab....>>>>>>>>>>>>....
+#=GC SS_cons_predicted            <<<<<<<...<<<........>>>..<<<<<.......>>>>>......<<<<.......>>>>.>>>>>>>....
+//

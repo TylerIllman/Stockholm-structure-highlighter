@@ -37,7 +37,10 @@ do
   check("three pairs found", struct.npairs == 3)
   check("outermost pair partners", struct.partner[1] == 9 and struct.partner[9] == 1)
   check("innermost pair partners", struct.partner[3] == 7)
-  check("one stem", struct.stem_id[1] == struct.stem_id[2] and struct.stem_id[2] == struct.stem_id[3])
+  check(
+    "one stem",
+    struct.stem_id[1] == struct.stem_id[2] and struct.stem_id[2] == struct.stem_id[3]
+  )
 end
 
 -- Named SS_cons_* lines, several per record, and several records.
@@ -102,11 +105,17 @@ do
   check("different pairs get different colours", a[1] ~= b[1])
   check("every pair is coloured in both lines", a[1] ~= nil and b[1] ~= nil)
   check("stem colour is the colour of its outermost pair", colors["SS_cons_b"].stem[3] == b[2])
-  check("active structure is numbered first, in column order", a[1] == 1 and a[2] == 2 and a[3] == 3)
+  check(
+    "active structure is numbered first, in column order",
+    a[1] == 1 and a[2] == 2 and a[3] == 3
+  )
 
   local other = sto._colors_for(rec, "SS_cons_b")
   check("numbering follows the active structure", other["SS_cons_b"].pair[1] == 1)
-  check("sharing still holds when the active line changes", other["SS_cons_a"].pair[2] == other["SS_cons_b"].pair[2])
+  check(
+    "sharing still holds when the active line changes",
+    other["SS_cons_a"].pair[2] == other["SS_cons_b"].pair[2]
+  )
 end
 
 -- Filetype detection.
