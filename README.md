@@ -3,12 +3,12 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/TylerIllman/stockholm-structure-highlighter.nvim/actions/workflows/ci.yml"><img src="https://github.com/TylerIllman/stockholm-structure-highlighter.nvim/actions/workflows/ci.yml/badge.svg" alt="tests"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/TylerIllman/stockholm-structure-highlighter.nvim" alt="MIT license"></a>
+  <a href="https://github.com/TylerIllman/Stockholm-structure-highlighter/actions/workflows/ci.yml"><img src="https://github.com/TylerIllman/Stockholm-structure-highlighter/actions/workflows/ci.yml/badge.svg" alt="tests"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/TylerIllman/Stockholm-structure-highlighter" alt="MIT license"></a>
   <img src="https://img.shields.io/badge/Neovim-0.10%2B-57A143?logo=neovim&logoColor=white" alt="Neovim 0.10+">
   <img src="https://img.shields.io/badge/Made%20with-Lua-2C2D72?logo=lua&logoColor=white" alt="Made with Lua">
-  <a href="https://github.com/TylerIllman/stockholm-structure-highlighter.nvim/stargazers"><img src="https://img.shields.io/github/stars/TylerIllman/stockholm-structure-highlighter.nvim?style=flat" alt="GitHub stars"></a>
-  <a href="https://github.com/TylerIllman/stockholm-structure-highlighter.nvim/commits/main"><img src="https://img.shields.io/github/last-commit/TylerIllman/stockholm-structure-highlighter.nvim" alt="Last commit"></a>
+  <a href="https://github.com/TylerIllman/Stockholm-structure-highlighter/stargazers"><img src="https://img.shields.io/github/stars/TylerIllman/Stockholm-structure-highlighter?style=flat" alt="GitHub stars"></a>
+  <a href="https://github.com/TylerIllman/Stockholm-structure-highlighter/commits/main"><img src="https://img.shields.io/github/last-commit/TylerIllman/Stockholm-structure-highlighter" alt="Last commit"></a>
 </p>
 
 Reading a secondary-structure line like `<<<<___AAA_>>>>` and working out which base closes which
@@ -47,7 +47,7 @@ With [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
-  "TylerIllman/stockholm-structure-highlighter.nvim",
+  "TylerIllman/Stockholm-structure-highlighter",
   lazy = false, -- the plugin registers the stockholm filetype, so it must load at startup
   opts = {}, -- see Configuration
 }
@@ -56,7 +56,7 @@ With [lazy.nvim](https://github.com/folke/lazy.nvim):
 With [packer.nvim](https://github.com/wbthomason/packer.nvim):
 
 ```lua
-use { "TylerIllman/stockholm-structure-highlighter.nvim" }
+use { "TylerIllman/Stockholm-structure-highlighter" }
 ```
 
 The plugin registers the `stockholm` filetype for `*.sto`, `*.stk` and `*.stockholm`. No setup call is
